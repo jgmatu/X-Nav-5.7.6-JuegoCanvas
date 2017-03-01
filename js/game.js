@@ -9,9 +9,9 @@ const HEIGHT = 480;
 const HALFW = WIDTH / 2;
 const HALFH = HEIGHT / 2;
 const MOVEDOWN = 40, MOVEUP = 38, MOVERIGHT = 39, MOVELEFT = 37;
-const OFFSETFOREST = 64;
+const OFFSETFOREST = 32;
 
-const OFFSETCENTER = 64;
+const OFFSETCENTER = 128;
 const CENTERMINY = HALFH - OFFSETCENTER, CENTERMAXY = HALFH + OFFSETCENTER;
 const CENTERMINX = HALFW - OFFSETCENTER, CENTERMAXX = HALFW + OFFSETCENTER;
 
@@ -173,6 +173,9 @@ function saveMove(object) {
 }
 
 function setLastMove(object) {
+	if (object.lastMove.x == undefined || object.lastMove.y == undefined) {
+		return obejet;
+	}
 	object.x = object.lastMove.x;
 	object.y = object.lastMove.y;
 
@@ -293,6 +296,7 @@ function newItems(game, items, max) {
 	if (items.num > max) {
 		items.num = max;
 	}
+
 	items = setInitialRandom(game, items);
  	items = putItems(game, items);
 
@@ -377,15 +381,7 @@ var main = function () {
 	then = now;
 };
 
-// Initial pos hero and princess...
-Game.hero = putCenter(Game.hero);
-Game.princess = putRandom(Game, Game.princess);
-
-// Let's play this game!
-
-Game = update(Game, 0, nframes);
-Game = render(Game, 0);
-
+Game = reset(Game);
 var then = Date.now();
 // The setInterval() method will wait a specified number of milliseconds, and then execute a specified function,
 // and it will continue to execute the function, once at every given time-interval.
