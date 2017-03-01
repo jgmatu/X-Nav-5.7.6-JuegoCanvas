@@ -2,4 +2,4 @@
 Un sencillo juego con canvas
 
 
-[Try me] (https://github.com/jgmatu/X-Nav-5.7.8-JuegoAvanzado.git)
+[Try me] (https://jgmatu.github.io/X-Nav-5.7.6-JuegoCanvas/)
